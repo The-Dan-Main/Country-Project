@@ -12,7 +12,7 @@ const updateInput = (event) => {
 }
 
 const onSubmit = (event) => {
-    console.log(event)
+    // console.log(event)
     props.getData(currentInput)
 }
 
