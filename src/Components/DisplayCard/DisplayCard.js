@@ -1,17 +1,21 @@
 import React from "react";
+import "./DisplayCard.css"
 
 class DisplayCard extends React.Component {
     constructor(props) {
         super(props);
-        this.state = props.state
+        // console.log(props)
+        // props.displayState(props)
     }
 
 
+    
     render () {
         return (
             <div className="display-section-container">
-                {/* <h3 className="country-header">{ props.result.name }</h3> */}
-    
+
+                <img src={ this.props.flag } alt="" className="display-flag"/>
+                <h4 className="country-header">{ this.props.title }</h4>
 
             </div>
         )

@@ -1,0 +1,45 @@
+
+.input-InputField {
+    height: 50px;
+    color: black;
+    padding-left: 10px;
+    padding-right: 10px;
+    border: gray solid 5px;
+    border-radius: 15px;
+    font-size: 20px;
+    width: 40%;
+
+}
+
+
+
+.input-InputField:hover {
+    border: black solid 5px;
+}
+
+.input-InputField:focus {
+    background-color: black;
+    border: none;
+    color: white;
+}
+
+
+
+.Input-field-container {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 50px;
+    padding-bottom: 50px;
+    border-bottom: solid gray 2px;
+}
+
+#input-submit-button {
+    /* height: 50px; */
+    color: black;
+    padding-left: 10px;
+    padding-right: 10px;
+    border: black solid 2px;
+    border-radius: 15px;
+    font-size: 20px;
+    font-weight: bold;
+}

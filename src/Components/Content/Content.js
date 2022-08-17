@@ -1,6 +1,6 @@
 import DisplayCard from "../DisplayCard/DisplayCard"
 import InputField from "../InputField/InputField"
-import React from "react"
+import React, { useState } from "react"
 
 
 
@@ -8,15 +8,15 @@ class Content extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            allResults: {},
+            allResults: {start: 0,},
             currentSearchResult: {},
             test: 0
         }
         this.getData = this.getData.bind(this)
+        this.allResults = this.state.allResults
     }
-    startState = () => {
-        console.log("state",  this.state)
-    }
+
+
 
 
     getData(searchName) {
@@ -24,15 +24,13 @@ class Content extends React.Component {
         .then((response) => response.json())
         .then((data) => {
             let first = data[0]
-            // console.log("state ",  this.state)
-            // console.log("first: ",first)
             this.setState({
                     allResults: data,
                     currentSearchResult: first,
-                    test: this.state.test++
+                    test: this.state.test += 1
                 }
-                ) 
-            // console.log("state",  this.state)
+                )
+            this.allResults = this.state.allResults
         })
     }
     
@@ -43,10 +41,15 @@ class Content extends React.Component {
                 <InputField 
                     getData={this.getData}
                 />
-                <DisplayCard 
-                    searchResult={this.state.currentSearchResult}
-                    state={this.state}
-                />
+                { Array.from(this.allResults).map(
+                    function(result) {
+                    return <DisplayCard 
+                        title={ result.name.common }
+                        key={ result.ccn3 }
+                        flag={ result.flags.png }
+                    
+                    />
+                })}
             </div>
     
         )
