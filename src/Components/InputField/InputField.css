@@ -7,7 +7,7 @@
     border: gray solid 5px;
     border-radius: 15px;
     font-size: 20px;
-    width: 40%;
+    width: 30%;
 
 }
 
@@ -27,7 +27,8 @@
 
 .Input-field-container {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
+    gap: 30px;
     margin-bottom: 50px;
     padding-bottom: 50px;
     border-bottom: solid gray 2px;

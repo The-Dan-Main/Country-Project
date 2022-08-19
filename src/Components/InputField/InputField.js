@@ -2,21 +2,25 @@ import "./InputField.css";
 
 const InputField = (props) => {
 
-
+// console.log('props',props.props.allResults)
 
 let currentInput = ""
 
 const updateInput = (event) => {
     currentInput = event.target.value
-    console.log(currentInput.length)
-    if(currentInput.length > 1 ) {
+    // console.log(currentInput)
+    // if(currentInput.length > 1 ) {
         props.getData(currentInput)
-    }
+    // }
 
 }
 
 const onSubmit = (event) => {
+    // console.log(event)
+    currentInput = event.target.previousSibling.value
+    // console.log(currentInput)
     props.getData(currentInput)
+
 }
 
 
@@ -25,7 +29,7 @@ return (
         <input 
         type="text" 
         placeholder="Search country" 
-        onChange={updateInput}
+        onInput={updateInput}
         className="input-InputField"
          />
         <button
