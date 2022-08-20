@@ -28,3 +28,7 @@
     visibility: visible;
     
 }
+
+.display-container {
+    display: flex;
+}

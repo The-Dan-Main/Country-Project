@@ -6,3 +6,11 @@
 .content-section {
     width: 100%;
 }
+
+.not-succesful-search {
+    visibility: hidden;
+}
+
+.error {
+    visibility: visible;
+}
