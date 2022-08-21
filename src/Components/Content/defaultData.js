@@ -15,7 +15,9 @@ const defaultData = [
     "independent": "",
     "status": "",
     "unMember": "",
-    "currencies": "",
+    "currencies": {
+      "": ""
+    },
     "idd": "",
     "capital": "",
     "altSpellings": "",

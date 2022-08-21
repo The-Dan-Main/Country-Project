@@ -1,6 +1,6 @@
 import DisplayCard from "../DisplayCard/DisplayCard"
 import InputField from "../InputField/InputField"
-import React, { useState } from "react"
+import React from "react"
 import './Content.css'
 import { defaultData } from "./defaultData"
 
@@ -13,6 +13,8 @@ class Content extends React.Component {
         }
         this.getData = this.getData.bind(this)
         this.allResults = this.state.allResults
+        this.delete = this.delete.bind(this)
+        this.add = this.add.bind(this)
     }
 
 
@@ -35,30 +37,39 @@ class Content extends React.Component {
                     }
                     )
                     this.allResults = this.state.allResults
-                    this.allResults.displayInfoAboutCountry = this.displayInfoAboutCountry
                 })
                 .catch((error) => {
                     console.log("Error:", error)
-                    this.setState(
-                        {
-                            allResults: [defaultData[0]],
-                            displayed: [defaultData[0]],
-                        }
-
-                    )
+                    // this.setState(
+                    //     {
+                    //         allResults: [defaultData[0]],
+                    //         displayed: [defaultData[0]],
+                    //     }
+                    // )
                 })
         }
         else {
             this.setState(
                 {
-                    allResults: [defaultData[0]],
-                    displayed: [defaultData[0]],
+                    allResults: [defaultData[0]]
                 }
-
             )
         }
     }
 
+
+    delete(newState) {
+        this.setState({
+            displayed: newState
+        })
+        this.forceUpdate()
+    }
+    add(newSate) {
+        this.setState({
+            displayed: newSate.displayed
+        })
+        this.forceUpdate()
+    }
 
     render() {
         return (
@@ -73,22 +84,10 @@ class Content extends React.Component {
                     <div className="search-results">
                         <DisplayCard
                             results={this.state.allResults}
-
                             state={this.state}
-
+                            delete={this.delete}
+                            add={this.add}
                         />
-
-
-                        {/* {Array.from(this.allResults).map(
-                            function (result) {
-                               
-                                return <DisplayCard
-                                    title={result.name.common}
-                                    key={result.ccn3}
-                                    flag={result.flags.png}
-                                    country={ result }
-                                />
-                            })} */}
                     </div>
                 </div>
             </div>

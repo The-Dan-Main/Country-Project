@@ -5,23 +5,40 @@ import CountryCard from "../CountryCard/CountryCard"
 class DisplayCard extends React.Component {
     constructor(props) {
         super(props);
-        console.log(props)
-        this.state = {
-            displayed: this.props.state.displayed
-        }
+        this.state = this.props.state
+        this.deleteCountryfromDisplay = this.deleteCountryfromDisplay.bind(this)
     }
 
 
     addTodisplayed(result) {
-        console.log(this.props.state.displayed)
-        console.log("duplicate:",this.props.state.displayed.includes(result))
-        console.log("index of duplicate:",this.props.state.displayed.indexOf(result))
-        if (this.props.state.displayed.includes(result)) {
-        } else{
+        if (this.state.displayed.includes(result)) {} 
+        else {
             this.state.displayed.push(result)
-            this.setState(this.state)
+            let newState = this.state
+            console.log("added country", newState)
+            this.props.add({
+                displayed: newState}
+                )
+            this.forceUpdate()
         }
+        
     }
+
+    deleteCountryfromDisplay (key) {
+        console.log(key)
+        console.log("delete wurde geklickt")
+        console.log(this.state.displayed.filter(country => country.ccn3 !== key))
+        const newState = this.state.displayed.filter(country => country.ccn3 !== key)
+        console.log("added deleted", newState)
+        this.props.delete(newState)
+        this.setState({
+            displayed: newState}
+            )
+        this.forceUpdate()
+    }
+
+
+
     render() {
         return (
             <div className="display-container">
@@ -47,16 +64,21 @@ class DisplayCard extends React.Component {
                         })}
                 </div>
                 <div className="country-detail-section">
-                {this.props.state.displayed.map(
+                    {this.state.displayed.map(
                         (result) => {
                             if (result.name.common !== "") {
                                 return (
-                                    <div className="display-section-container">
-                                        <h5 className="result-title">{result.name.common}</h5>
-                                    </div>
+                                    <CountryCard
+                                        state={this.state}
+                                        title={result.name.common}
+                                        country={result}
+                                        key={result.cnn3}
+                                        delete={this.deleteCountryfromDisplay}
+                                    />
                                 )
-                            }
-                        })}
+                            } else {return null}
+                        }              
+                        )}
 
                 </div>
             </div>
