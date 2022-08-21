@@ -1,28 +1,36 @@
-
+import "./InputField.css";
 
 const InputField = (props) => {
 
-
+// console.log('props',props.props.allResults)
 
 let currentInput = ""
 
 const updateInput = (event) => {
-    // console.log(event.target.value)
     currentInput = event.target.value
+    // console.log(currentInput)
+    // if(currentInput.length > 1 ) {
+        props.getData(currentInput)
+    // }
+
 }
 
 const onSubmit = (event) => {
-    console.log(event)
+    // console.log(event)
+    currentInput = event.target.previousSibling.value
+    // console.log(currentInput)
     props.getData(currentInput)
+
 }
 
 
 return (
-    <div className="Input-field">
+    <div className="Input-field-container">
         <input 
         type="text" 
-        placeholder="Type in text and search for country" 
-        onChange={updateInput}
+        placeholder="Search country" 
+        onInput={updateInput}
+        className="input-InputField"
          />
         <button
          id="input-submit-button"

@@ -1,0 +1,16 @@
+.result-section {
+    display: flex;
+    flex-direction: column;
+}
+
+.content-section {
+    width: 100%;
+}
+
+.not-succesful-search {
+    visibility: hidden;
+}
+
+.error {
+    visibility: visible;
+}
