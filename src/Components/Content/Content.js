@@ -23,7 +23,7 @@ class Content extends React.Component {
     }
 
 
-    getData(searchName) {
+    getData = (searchName) => {
         if (searchName.length > 0) {
             fetch(`https://restcountries.com/v3.1/name/${searchName}?access_key=b42b74623d0e404353804bd0dcd3832a`)
                 .then((response) => {
@@ -45,6 +45,7 @@ class Content extends React.Component {
                 })
                 .catch((error) => {
                     console.log("Error:", error)
+                    
                     // this.setState(
                     //     {
                     //         allResults: [defaultData[0]],
@@ -53,13 +54,13 @@ class Content extends React.Component {
                     // )
                 })
         }
-        else {
-            this.setState(
-                {
-                    allResults: [defaultData[0]]
-                }
-            )
-        }
+        // else {
+        //     this.setState(
+        //         {
+        //             allResults: [defaultData[0]]
+        //         }
+        //     )
+        // }
     }
 
 

@@ -14,16 +14,19 @@ constructor(props) {
     this.languages = Object.values(this.props.country.languages)
 }
 
+
 // FEEDBACK: Good use of a function to render the currencies
 displayCurrency (currencies) {
+    const result = []
     const len = Object.keys(currencies).length
-    let output = `${Object.values(currencies)[0].name} (${Object.keys(currencies)[0]}) // `
+    result.push(`${Object.values(currencies)[0].name} (${Object.keys(currencies)[0]})`)
     if (len > 1) {
         for (let i = 1; i < len; i++) {
-            output = output + `${Object.values(currencies)[i].name} (${Object.keys(currencies)[i]})`
+            result.push(`${Object.values(currencies)[i].name} (${Object.keys(currencies)[i]})`)
         }
     }
-    return output
+    console.log(result)
+    return result
 }
 
 displayLanguages (languages) {
@@ -39,12 +42,13 @@ displayLanguages (languages) {
 
 
 render() {
+    const { country } = this.props;
     return (
         <div className="CountryCard-container">
             <div 
                 className="close-button-container"
                 // FEEDBACK: good use of passing a function as props to lift up the state
-                onClick={() => this.props.delete(this.country.name.official)}
+                onClick={() => this.props.delete(country.name.official)}
                 >
                 <img 
                 src="https://img.icons8.com/sf-regular/48/000000/close-window.png" 
@@ -57,9 +61,9 @@ render() {
             <h4 className="country-title">{this.props.title}</h4>
             <p className="country-display-header flex-card-item">Capital:     <span className="country-values">{this.country.capital[0]}</span></p>
             <p className="country-display-header flex-card-item">Continent: <span className="country-values">{this.country.continents[0]}</span></p>
-            <p className="country-display-header flex-card-item">Currencies: </p><span className="country-values-currency">{this.displayCurrency(this.currency)}</span>
+            <p className="country-display-header flex-card-item">Currencies: </p><span className="country-values-currency">{this.displayCurrency(this.currency).map(currency => <p>{currency}</p>)}</span>
             <p className="country-display-header flex-card-item">Cars drive on side: <span className="country-carside">{this.country.car.side}</span></p>
-            <p className="country-display-header flex-card-item">languages: <span className="country-languages">{this.displayLanguages(this.languages)}</span></p>
+            <p className="country-display-header flex-card-item">languages: <div className="country-languages">{this.displayLanguages(this.languages)}</div></p>
         </div>
     )
 }

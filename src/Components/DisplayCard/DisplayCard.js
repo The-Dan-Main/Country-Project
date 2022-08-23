@@ -5,6 +5,7 @@ import CountryCard from "../CountryCard/CountryCard"
 class DisplayCard extends React.Component {
     constructor(props) {
         super(props);
+        // Remove this here and just use the props coming down
         this.state = this.props.state
         this.deleteCountryfromDisplay = this.deleteCountryfromDisplay.bind(this)
     }
@@ -50,7 +51,7 @@ class DisplayCard extends React.Component {
         return (
             <div className="display-container">
                 <div className="search-result-section">
-                    {this.props.results.map(
+                    {this.props.results.length && this.props.results.map(
                         (result) => {
                             return (
                                 <div
