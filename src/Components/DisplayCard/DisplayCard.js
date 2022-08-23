@@ -13,24 +13,31 @@ class DisplayCard extends React.Component {
     addTodisplayed(result) {
         if (this.state.displayed.includes(result)) {} 
         else {
+            // FEEDBACK: never push anything directly to state this can cause 
+            // side effects on updates to the state
             this.state.displayed.push(result)
             let newState = this.state
+
             console.log("added country", newState)
             this.props.add({
-                displayed: newState}
-                )
+                displayed: newState
+            })
             this.forceUpdate()
         }
-        
     }
 
     deleteCountryfromDisplay (key) {
         console.log(key)
         console.log("delete wurde geklickt")
-        console.log(this.state.displayed.filter(country => country.ccn3 !== key))
-        const newState = this.state.displayed.filter(country => country.ccn3 !== key)
+    
+        console.log(this.state.displayed.filter(country => country.name.official !== key))
+        const newState = this.state.displayed.filter(country => country.name.official !== key)
         console.log("added deleted", newState)
         this.props.delete(newState)
+        // FEEDBACK: you are managing the state for the displayed in two places on the DisplayCard 
+        // and in the content. This is probably the cause for the bug as they are out of sync
+        // manage the state of the displayed in the content and then pass down as props that data to the 
+        // displayCard
         this.setState({
             displayed: newState}
             )

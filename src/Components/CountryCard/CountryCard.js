@@ -4,6 +4,9 @@ import "./CountryCard.css"
 class CountryCard extends React.Component {
 constructor(props) {
     super(props)
+    // TODO: avoid assiging the props in the constructor like you are doing here
+    // instead just use render the props within the return
+    // this could be a functional component also as there is no use of state
     this.state = this.props.state
     this.key = this.props.key
     this.country =  this.props.country
@@ -11,7 +14,7 @@ constructor(props) {
     this.languages = Object.values(this.props.country.languages)
 }
 
-
+// FEEDBACK: Good use of a function to render the currencies
 displayCurrency (currencies) {
     const len = Object.keys(currencies).length
     let output = `${Object.values(currencies)[0].name} (${Object.keys(currencies)[0]}) // `
@@ -40,7 +43,8 @@ render() {
         <div className="CountryCard-container">
             <div 
                 className="close-button-container"
-                onClick={() => this.props.delete(this.country.ccn3)}
+                // FEEDBACK: good use of passing a function as props to lift up the state
+                onClick={() => this.props.delete(this.country.name.official)}
                 >
                 <img 
                 src="https://img.icons8.com/sf-regular/48/000000/close-window.png" 

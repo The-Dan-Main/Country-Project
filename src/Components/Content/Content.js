@@ -8,10 +8,15 @@ class Content extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
+            // FEEDBACK: I would suggest removing this default data, It does not seem to be
+            // doing anything
             allResults: [defaultData[0]],
             displayed: [defaultData[0]],
         }
+        // TODO: you can remove the bindings of on the constructor if you change all of your 
+        // functions on the class to use the arrow functions
         this.getData = this.getData.bind(this)
+        // FEEDBACK: if you are storing data it should always be stored within state
         this.allResults = this.state.allResults
         this.delete = this.delete.bind(this)
         this.add = this.add.bind(this)
@@ -68,6 +73,9 @@ class Content extends React.Component {
         this.setState({
             displayed: newSate.displayed
         })
+
+        // TODO: remove all instances of forceUpdate as 
+        // setState is already updating the components
         this.forceUpdate()
     }
 
@@ -77,6 +85,7 @@ class Content extends React.Component {
                 <h1>Country Project</h1>
                 <InputField
                     getData={this.getData}
+                    
                     props={this.state}
                 />
                 <h5 className="not-succesful-search">This country does not exists</h5>
