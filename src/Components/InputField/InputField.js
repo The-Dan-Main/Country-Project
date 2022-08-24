@@ -1,44 +1,44 @@
+import React from "react";
 import "./InputField.css";
 
-const InputField = (props) => {
+class InputField extends React.Component {
+    // eslint-disable-next-line
+    constructor(props) {
+        super(props);
+        this.currentInput = "";
+    }
 
-// console.log('props',props.props.allResults)
+    /** only in use, when it should fetch while typping searchinput */
+    // updateInput = (event) => {
+    //     this.currentInput = event.target.value
+    //     this.props.getData(this.currentInput)
 
-let currentInput = ""
-
-const updateInput = (event) => {
-    currentInput = event.target.value
-    // console.log(currentInput)
-    // if(currentInput.length > 1 ) {
-        props.getData(currentInput)
     // }
 
-}
+    onSubmit = (event) => {
+        this.currentInput = event.target.previousSibling.value
+        this.props.getData(this.currentInput)
 
-const onSubmit = (event) => {
-    // console.log(event)
-    currentInput = event.target.previousSibling.value
-    // console.log(currentInput)
-    props.getData(currentInput)
+    }
 
-}
-
-
-return (
-    <div className="Input-field-container">
-        <input 
-        type="text" 
-        placeholder="Search country" 
-        onInput={updateInput}
-        className="input-InputField"
-         />
-        <button
-         id="input-submit-button"
-         onClick={onSubmit}
-            >Click me to search!
-        </button>
-    </div>
-)
+    render() {
+        return (
+            <div className="Input-field-container">
+                <input
+                    type="text"
+                    placeholder="Search country"
+                    className="input-InputField"
+                    onKeyDown={(event) => {event.key === "Enter" && this.props.getData(event.target.value)}}
+                />
+                <button
+                    id="input-submit-button"
+                    onClick={this.onSubmit}
+                >
+                    Click me to search!
+                </button>
+            </div>
+        )
+    }
 
 }
 

@@ -1,40 +1,30 @@
 import React from "react";
 import "./DisplayCard.css"
 import CountryCard from "../CountryCard/CountryCard"
+import SearchResult from "../SearchResult/SearchResult";
 
 class DisplayCard extends React.Component {
+    // eslint-disable-next-line
     constructor(props) {
-        super(props);
-        this.state = this.props.state
-        this.deleteCountryfromDisplay = this.deleteCountryfromDisplay.bind(this)
+        super(props)
     }
 
 
-    addTodisplayed(result) {
-        if (this.state.displayed.includes(result)) {} 
-        else {
-            this.state.displayed.push(result)
-            let newState = this.state
-            console.log("added country", newState)
+    addTodisplayed = (result) => {
+        if (!this.props.displayed.includes(result)) {
+            this.props.displayed.push(result)
+            let newState = this.props.displayed
             this.props.add({
-                displayed: newState}
-                )
-            this.forceUpdate()
+                displayed: newState
+            })
         }
-        
     }
 
-    deleteCountryfromDisplay (key) {
-        console.log(key)
-        console.log("delete wurde geklickt")
-        console.log(this.state.displayed.filter(country => country.ccn3 !== key))
-        const newState = this.state.displayed.filter(country => country.ccn3 !== key)
-        console.log("added deleted", newState)
-        this.props.delete(newState)
-        this.setState({
-            displayed: newState}
-            )
-        this.forceUpdate()
+    deleteCountryfromDisplay = (key) => {
+        const newState = this.props.displayed.filter(country => country.ccn3 !== key)
+        this.props.delete({
+            displayed: newState
+        })
     }
 
 
@@ -43,46 +33,36 @@ class DisplayCard extends React.Component {
         return (
             <div className="display-container">
                 <div className="search-result-section">
-                    {this.props.results.map(
+                    {this.props.results.length > 0 && this.props.results.map(
                         (result) => {
                             return (
-                                <div
-                                    className="display-section-container"
+                                <SearchResult
                                     key={result.ccn3}
-                                >
-                                    <img
-                                        src={result.flags.png}
-                                        alt=""
-                                        className="display-flag"
-                                        onClick={() => this.addTodisplayed(result)}
-                                    />
-                                    <h4
-                                        className="country-header"
-                                    >{result.name.common}</h4>
-                                </div>
+                                    src={result.flags.png}
+                                    addTodisplayed={() => this.addTodisplayed(result)}
+                                    title={result.name.common}
+                                    result={result}
+                                />
                             )
-                        })}
+                        }
+                    )
+                    }
                 </div>
                 <div className="country-detail-section">
-                    {this.state.displayed.map(
+                    {this.props.results.length > 0 && this.props.displayed.map(
                         (result) => {
-                            if (result.name.common !== "") {
-                                return (
-                                    <CountryCard
-                                        state={this.state}
-                                        title={result.name.common}
-                                        country={result}
-                                        key={result.cnn3}
-                                        delete={this.deleteCountryfromDisplay}
-                                    />
-                                )
-                            } else {return null}
-                        }              
-                        )}
-
+                            return (
+                                <CountryCard
+                                    title={result.name.common}
+                                    country={result}
+                                    key={result.cnn3}
+                                    delete={this.deleteCountryfromDisplay}
+                                />
+                            )
+                        }
+                    )}
                 </div>
             </div>
-
         )
     }
 }

@@ -51,11 +51,7 @@
     filter: invert(100%);
     visibility: hidden;
 }
-
 .country-values-currency {
-    padding: 1px 8px;
-}
-.country-values-currency::before {
-      content: "";
-      display: block;
+    font-weight: bold;
+    text-decoration: none;
 }
